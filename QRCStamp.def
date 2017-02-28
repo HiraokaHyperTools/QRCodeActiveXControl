@@ -1,0 +1,9 @@
+﻿; QRCStamp.def : モジュール パラメータを宣言します。
+
+LIBRARY      "QRCStamp.OCX"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE

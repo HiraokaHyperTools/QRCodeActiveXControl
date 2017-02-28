@@ -1,0 +1,103 @@
+﻿// QRCStamp.idl : ActiveX コントロール プロジェクトのタイプ ライブラリ ソースです。
+
+// このファイルは、QRCStamp.ocx のリソース
+// になるタイプ ライブラリ (QRCStamp.tlb) を作成するために MIDL コンパイラ ツール
+// によって処理されます。
+
+#include <olectl.h>
+#include <idispids.h>
+
+typedef enum tagSizeModeEnum {
+	SizeModeCenter = 0,
+	SizeModeStretch = 1,
+	SizeModeZoom = 2,
+} SizeModeEnum;
+
+typedef enum tagQRErrorCorrectLevel {
+	ErrorCorrectLevelL = 1,
+	ErrorCorrectLevelM = 0,
+	ErrorCorrectLevelQ = 3,
+	ErrorCorrectLevelH = 2,
+} QRErrorCorrectLevelEnum;
+
+typedef enum tagEncodeMode {
+	EncodeModeShiftJIS = 0,
+	EncodeModeAlphaNum,
+	EncodeModeNum,
+	EncodeMode8bit,
+	EncodeModeStrucShiftJIS = 256,
+	EncodeModeStrucAlphaNum,
+	EncodeModeStrucNum,
+	EncodeModeStruc8bit,
+	EncodeModeVertStrucShiftJIS = 512,
+	EncodeModeVertStrucAlphaNum,
+	EncodeModeVertStrucNum,
+	EncodeModeVertStruc8bit,
+} EncodeModeEnum;
+
+[ uuid(60028474-1671-4F2D-94CF-86638796997F), version(1.3),
+  helpfile("QRCStamp.hlp"),
+  helpstring("QRCStamp ActiveX Control Module"),
+  control ]
+library QRCStampLib
+{
+	importlib(STDOLE_TLB);
+
+	//  CQRCStampCtrl のプライマリ ディスパッチ インターフェイスです。
+
+	[ uuid(D94D9B2B-F60D-498B-8F56-4D067680E08B),
+	  helpstring("QRCodeActiveXControl (libqrencode) Dispatch Interface")]
+	dispinterface _DQRCStamp
+	{
+		properties:
+			[id(1001), bindable, defaultbind] VARIANT Value;
+			[id(1002), bindable] DOUBLE PelsPerMeter;
+			[id(1003), bindable] IPictureDisp*Picture;
+			[id(1004), bindable] SizeModeEnum SizeMode;
+			[id(1005), bindable] QRErrorCorrectLevelEnum ErrorCorrectLevel;
+			[id(1006), bindable] EncodeModeEnum EncodeMode;
+			[id(DISPID_BACKCOLOR), bindable, requestedit] OLE_COLOR BackColor;
+			[id(DISPID_FORECOLOR), bindable, requestedit] OLE_COLOR ForeColor;
+			[id(DISPID_FONT), bindable, requestedit] IFontDisp*Font;
+			[id(1007), bindable] LONG PixScale;
+			[id(1008), bindable] LONG QRVersion;
+			[id(1009), bindable] VARIANT_BOOL HasErrors;
+			[id(1010), bindable] BSTR ErrorMessage;
+	methods:
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  CQRCStampCtrl のイベント ディスパッチ インターフェイスです。
+
+	[ uuid(834C0E14-6FEE-484E-A826-450701DA595B),
+	  helpstring("QRCodeActiveXControl (libqrencode) Event Interface") ]
+	dispinterface _DQRCStampEvents
+	{
+		properties:
+			//  イベント インターフェイスにプロパティがありません。
+
+		methods:
+			[id(1001)] void ValueChange();
+			[id(1002)] void PelsPerMeterChange();
+			[id(1003)] void PictureChange();
+			[id(1004)] void SizeModeChange();
+			[id(1005)] void ErrorCorrectLevelChange();
+			[id(1006)] void EncodeModeChange();
+			[id(1007)] void PixScaleChange();
+			[id(1008)] void QRVersionChange();
+			[id(1009)] void HasErrorsChange();
+			[id(1010)] void ErrorMessageChange();
+	};
+
+	//  CQRCStampCtrl のクラス情報です。
+
+	[ uuid(D6FEB896-8CB3-4B3A-B997-4ED31B7670EC),
+	  helpstring("QRCodeActiveXControl (libqrencode)"), control ]
+	coclass QRCStamp
+	{
+		[default] dispinterface _DQRCStamp;
+		[default, source] dispinterface _DQRCStampEvents;
+	};
+
+};
