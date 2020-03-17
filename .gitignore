@@ -252,3 +252,4 @@ paket-files/
 *.sln.iml
 
 /Setup_QRCodeActiveXControl_*.exe
+/Tmpver.nsh

@@ -7,12 +7,20 @@
 
 ;--------------------------------
 
+Unicode true
+XPStyle on
+
 !define APP "QRCodeActiveXControl"
 !define COM "HIRAOKA HYPERS TOOLS, Inc."
-!define VER "0.0.3"
-!define APV "0_0_3"
+
+!system 'DefineAsmVer.exe "RELEASE\QRCStamp.ocx" "!define VER ""[SVER]"" " > Tmpver.nsh'
+!include "Tmpver.nsh"
+!searchreplace APV ${VER} "." "_"
 
 !define TTL "QRCodeActiveXControl ${VER}"
+
+!system 'MySign "RELEASE\QRCStamp.ocx" "x64\RELEASE\QRCStamp.ocx"'
+!finalize 'MySign "%1"'
 
 ; The name of the installer
 Name "${TTL}"
@@ -39,8 +47,8 @@ RequestExecutionLevel admin
 ; Pages
 
 Page license
-Page components
 Page directory
+Page components
 Page instfiles
 
 LicenseData "LICENSE"
@@ -51,7 +59,7 @@ UninstPage instfiles
 ;--------------------------------
 
 ; The stuff to install
-Section "QRCodeActiveXControl (x86; 32)"
+Section ""
 
   SectionIn RO
   
@@ -59,10 +67,13 @@ Section "QRCodeActiveXControl (x86; 32)"
   SetOutPath $INSTDIR
   
   ; Put file there
+  SetOutPath $INSTDIR
   File "Release\QRCStamp.ocx"
-  
-  RegDLL "$INSTDIR\QRCStamp.ocx"
-  
+  SetOutPath $INSTDIR\x64
+  File "x64\Release\QRCStamp.ocx"
+
+  SetOutPath $INSTDIR
+
   ; Write the installation path into the registry
   WriteRegStr HKLM "SOFTWARE\${COM}\${APP}" "Install_Dir" "$INSTDIR"
   
@@ -73,6 +84,16 @@ Section "QRCodeActiveXControl (x86; 32)"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP}" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
   
+SectionEnd
+
+Section "Register QRCStamp.ocx (32 bit)"
+  ExecWait 'REGSVR32 /s "$INSTDIR\QRCStamp.ocx"' $0
+  DetailPrint "Result: $0"
+SectionEnd
+
+Section "Register QRCStamp.ocx (64 bit)"
+  ExecWait 'REGSVR32 /s "$INSTDIR\x64\QRCStamp.ocx"' $0
+  DetailPrint "Result: $0"
 SectionEnd
 
 Section "Clear QRCStampLib.exd files"
