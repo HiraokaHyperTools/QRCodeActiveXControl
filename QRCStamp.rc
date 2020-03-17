@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 resources
+// 日本語 (日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-#ifdef _WIN32
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 #pragma code_page(932)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -53,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,3,0
- PRODUCTVERSION 0,0,3,0
+ FILEVERSION 0,0,4,0
+ PRODUCTVERSION 0,0,4,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -72,11 +70,11 @@ BEGIN
             VALUE "Comments", "QRCodeActiveXControl (libqrencode)"
             VALUE "CompanyName", "HIRAOKA HYPERS TOOLS, Inc."
             VALUE "FileDescription", "QRCodeActiveXControl (libqrencode)"
-            VALUE "FileVersion", "0, 0, 3, 0"
+            VALUE "FileVersion", "0.0.4.0"
             VALUE "InternalName", "QRCStamp.ocx"
             VALUE "OriginalFilename", "QRCStamp.ocx"
             VALUE "ProductName", "QRCStamp"
-            VALUE "ProductVersion", "0, 0, 3, 0"
+            VALUE "ProductVersion", "0.0.4.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -95,14 +93,18 @@ END
 // remains consistent on all systems.
 IDI_ABOUTDLL            ICON                    "QRCStamp.ico"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
 IDB_QRCSTAMP            BITMAP                  "QRCStampCtrl.bmp"
+
 IDB_GENERATION_FAILURE  BITMAP                  "Error.bmp"
+
 IDB_LIMIT_OVER          BITMAP                  "LimitOver.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -142,7 +144,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX_QRCSTAMP, DIALOG
     BEGIN
@@ -199,24 +201,24 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_QRCSTAMP            "QRCodeActiveXControl (libqrencode)"
     IDS_QRCSTAMP_PPG        "QRCStamp Property Page"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_QRCSTAMP_PPG_CAPTION "全般"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_LIMIT_OVER          "容量オーバーです。作成できません。"
     IDS_GENERATION_FAILURE  "画像を作成できませんでした。"
 END
 
-#endif    // 日本語 resources
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
