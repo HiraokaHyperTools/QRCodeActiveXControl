@@ -12,14 +12,17 @@ XPStyle on
 
 !define APP "QRCodeActiveXControl"
 !define COM "HIRAOKA HYPERS TOOLS, Inc."
+!define BINDIR "RELEASE"
+!define BINDIR64 "x64\RELEASE"
+!define BINDIRA64X "ARM64EC\RELEASE"
 
-!system 'DefineAsmVer.exe "RELEASE\QRCStamp.ocx" "!define VER ""[SVER]"" " > Tmpver.nsh'
+!system 'DefineAsmVer.exe "${BINDIR}\QRCStamp.ocx" "!define VER ""[SVER]"" " > Tmpver.nsh'
 !include "Tmpver.nsh"
 !searchreplace APV ${VER} "." "_"
 
 !define TTL "QRCodeActiveXControl ${VER}"
 
-!system 'MySign "RELEASE\QRCStamp.ocx" "x64\RELEASE\QRCStamp.ocx"'
+!system 'MySign "${BINDIR}\QRCStamp.ocx" "${BINDIR64}\QRCStamp.ocx" "${BINDIRA64X}\QRCStamp.ocx"'
 !finalize 'MySign "%1"'
 
 ; The name of the installer
@@ -39,6 +42,8 @@ InstallDirRegKey HKLM "Software\${COM}\${APP}" "Install_Dir"
 RequestExecutionLevel admin
 
 !include "FileFunc.nsh"
+!include "LogicLib.nsh"
+!include "x64.nsh"
 
 !insertmacro Locate
 
@@ -68,9 +73,14 @@ Section ""
   
   ; Put file there
   SetOutPath $INSTDIR
-  File "Release\QRCStamp.ocx"
-  SetOutPath $INSTDIR\x64
-  File "x64\Release\QRCStamp.ocx"
+  File "${BINDIR}\QRCStamp.ocx"
+  ${If} ${IsNativeAMD64}
+    SetOutPath $INSTDIR\x64
+    File "${BINDIR64}\QRCStamp.ocx"
+  ${ElseIf} ${IsNativeARM64}
+    SetOutPath $INSTDIR\x64
+    File "${BINDIRA64X}\QRCStamp.ocx"
+  ${EndIf}
 
   SetOutPath $INSTDIR
 
@@ -124,8 +134,14 @@ Section "Uninstall"
   DeleteRegKey HKLM "SOFTWARE\${COM}\${APP}"
 
   ; Remove files and uninstaller
-  UnRegDLL "$INSTDIR\QRCStamp.ocx"
-  Delete "$INSTDIR\QRCStamp.ocx"
+  ExecWait 'REGSVR32 /s /u "$INSTDIR\x64\QRCStamp.ocx"' $0
+  DetailPrint "Result: $0"
+  Delete                   "$INSTDIR\x64\QRCStamp.ocx"
+  
+  ExecWait 'REGSVR32 /s /u "$INSTDIR\QRCStamp.ocx"' $0
+  DetailPrint "Result: $0"
+  Delete                   "$INSTDIR\QRCStamp.ocx"
+  
   Delete "$INSTDIR\uninstall.exe"
 
   ; Remove shortcuts, if any

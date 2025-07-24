@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 日本語 (日本) resources
+// Japanese (Japan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,4,0
- PRODUCTVERSION 0,0,4,0
+ FILEVERSION 0,0,5,0
+ PRODUCTVERSION 0,0,5,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,11 +70,11 @@ BEGIN
             VALUE "Comments", "QRCodeActiveXControl (libqrencode)"
             VALUE "CompanyName", "HIRAOKA HYPERS TOOLS, Inc."
             VALUE "FileDescription", "QRCodeActiveXControl (libqrencode)"
-            VALUE "FileVersion", "0.0.4.0"
+            VALUE "FileVersion", "0.0.5.0"
             VALUE "InternalName", "QRCStamp.ocx"
             VALUE "OriginalFilename", "QRCStamp.ocx"
             VALUE "ProductName", "QRCStamp"
-            VALUE "ProductVersion", "0.0.4.0"
+            VALUE "ProductVersion", "0.0.5.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -218,7 +218,7 @@ BEGIN
     IDS_GENERATION_FAILURE  "画像を作成できませんでした。"
 END
 
-#endif    // 日本語 (日本) resources
+#endif    // Japanese (Japan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

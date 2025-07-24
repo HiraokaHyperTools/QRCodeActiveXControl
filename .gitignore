@@ -253,3 +253,5 @@ paket-files/
 
 /Setup_QRCodeActiveXControl_*.exe
 /Tmpver.nsh
+/ARM64/
+/ARM64EC/
