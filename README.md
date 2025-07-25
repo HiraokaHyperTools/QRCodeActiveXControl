@@ -2,6 +2,14 @@
 
 https://raw.githubusercontent.com/HiraokaHyperTools/QRCodeActiveXControl/master/how2.png
 
+## 0.0.5
+
+- x86, x64, Arm64X に対応しました
+
+## 0.0.4
+
+- MSVC ランタイムライブラリを内蔵するようにしました
+
 ## 0.0.3
 
 - エラーを出力し易い体質を改善しました。具体的には、エラーをコントロールを外側へ送信しないようにしました。代わりに ErrorMessage と HasErrors と Picture を設定します。
